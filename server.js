@@ -14,4 +14,4 @@ routes(app)
 
 
 const server = http.Server(app)
-server.listen(process.env.PORT || 8080)
+server.listen(8080)
