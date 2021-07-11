@@ -12,8 +12,11 @@ router.post('/getChampsMaestry', champsController.getChampMaestry)
 
 router.post('/getLeague', summonerController.getLeague)
 
-router.post('/getChampMatch', matchController.getChampTime)
+router.post('/getChampMatch', matchController.getChampMatch)
 
 router.post('/getMatch', matchController.getMatch)
+
+router.post('/getMatchList', matchController.getMatchList)
+
 
 module.exports = router

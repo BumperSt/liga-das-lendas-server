@@ -10,7 +10,8 @@ const summonerModel = new Schema({
     profileIconId: Number,
     puuid: String,
     revisionData: Number,
-    summonerLevel: Number
+    summonerLevel: Number,
+    timestamp : { type : Date, default: Date.now }
 });
 
 // Compile model from schema

@@ -7,6 +7,6 @@ module.exports = (app) => {
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(cookieParser())
-  app.use(cors({ origin: 'https://liga-das-lendas-client.vercel.app/'}))
+  app.use(cors())
   app.use(helmet())
 }

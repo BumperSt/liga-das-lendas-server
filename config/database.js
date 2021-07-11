@@ -4,8 +4,9 @@ const dataBase = () => {
   // Database connection
   mongoose.connect(process.env.MONGO_CONNECTION_URL,
     {
-        useNewUrlParser: true
-      // useUnifiedTopology:true
+        useNewUrlParser: true,
+        useFindAndModify:false,
+        useUnifiedTopology:true
     }, (err) => {
       if (err) {
         // Log the error
