@@ -12,6 +12,7 @@ const champsController = {
         })
          
      },
+     
      getChampMaestry:(request, response) =>{
           let {encryptedSummonerId} = request.body
           api.getChampMaestry(encryptedSummonerId)

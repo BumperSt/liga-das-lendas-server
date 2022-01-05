@@ -1,4 +1,4 @@
-const api = require('./index')
+const {api} = require('./index')
 
 module.exports = {
     getChampsRotation: () => api.get('/lol/platform/v3/champion-rotations'),

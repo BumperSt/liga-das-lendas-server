@@ -2,20 +2,14 @@ const mongoose = require('mongoose')
 
 const dataBase = () => {
   // Database connection
-  mongoose.connect(process.env.MONGO_CONNECTION_URL,
-    {
-        useNewUrlParser: true,
-        useFindAndModify:false,
-        useUnifiedTopology:true
-    }, (err) => {
-      if (err) {
-        // Log the error
+  console.log(process.env.MONGO_CONNECTION_URL)
+  mongoose.connect(process.env.MONGO_CONNECTION_URL,(err) => {
+    if (err) {
         console.error(err)
-      }
-      else {
-        // Log success
+    }
+    else {
         console.info("Mongo connected")
-      }
+    }
     })
 }
 module.exports = dataBase

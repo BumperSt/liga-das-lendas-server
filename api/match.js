@@ -1,11 +1,10 @@
-const api = require('./index')
+const {historyApi} = require('./index')
 
 module.exports = {
 
-    getMatch: (matchId) => api.get(`/lol/match/v4/matches/${matchId}`),
+    getMatch: (matchId) => historyApi.get(`/lol/match/v5/matches/${matchId}`),
 
+    getChampMatch: (puuid, championID, beginIndex) => historyApi.get(`/lol/match/v5/matches/by-puuid/${puuid}?champion=${championID}&beginIndex=${beginIndex}`),
 
-    getChampMatch: (encryptedAccountId, championID, beginIndex) => api.get(`/lol/match/v4/matchlists/by-account/${encryptedAccountId}?champion=${championID}&beginIndex=${beginIndex}`),
-
-    getMatchList: (encryptedAccountId) => api.get(`/lol/match/v4/matchlists/by-account/${encryptedAccountId}`)
+    getMatchList: (puuid) => historyApi.get(`/lol/match/v5/matches/by-puuid/${puuid}/ids`)
 }

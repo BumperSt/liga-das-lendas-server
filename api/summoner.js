@@ -1,4 +1,4 @@
-const api = require('./index')
+const {api} = require('./index')
 
 module.exports = {
     getSummonerInfo: (summonerName) => api.get(`/lol/summoner/v4/summoners/by-name/${summonerName}`),
