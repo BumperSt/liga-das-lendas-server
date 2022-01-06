@@ -18,9 +18,9 @@ const matchController = {
         })
     },
     getMatchList: (request, response)=>{
-         let { puuid} = request.body
+         let {puuid, startIndex} = request.body
          console.log(puuid)
-         api.getMatchList(puuid)
+         api.getMatchList(puuid, startIndex)
           .then(({data}) => {
                response.status(200).json(data)
           })
@@ -36,7 +36,6 @@ const matchController = {
         matchModel.findOne({'metadata.matchId': matchId}, function(err,obj) { 
                if(!err){
                     if(obj){
-                         console.log(obj)
                          response.status(200).json(obj)
                          
                     }else{
