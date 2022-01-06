@@ -6,26 +6,24 @@ const matchModel = require('../models/matchModel')
 const matchController = {
 
      getChampMatch: (request, response) =>{
-          console.log(request.body)
         let {puuid, championID,beginIndex} = request.body
         api.getChampMatch(puuid, championID, beginIndex)
         .then(({data}) => {
              response.status(200).json(data)
         })
         .catch((error) => {
-             console.log(error)
+             console.error(error)
              response.status(error.response.status).json(error)
         })
     },
     getMatchList: (request, response)=>{
          let {puuid, startIndex} = request.body
-         console.log(puuid)
          api.getMatchList(puuid, startIndex)
           .then(({data}) => {
                response.status(200).json(data)
           })
           .catch((error) =>{
-               console.log(error.response)
+               console.error(error.response)
                response.status(error.response.status).json(error)
           })
     },
@@ -42,20 +40,19 @@ const matchController = {
 
                          api.getMatch(matchId)
                          .then(({data}) => {
-                              console.log(data)
                               let new_match = new matchModel(data)
                               new_match.save()
                               response.status(200).json(data)
                          })
                          .catch((error) => {
-                              console.log(error)
+                              console.error(error)
                               response.status(500).json(error)
                          })
 
 
                     }
                }else{
-                    console.log(err)
+                    console.error(err)
                }
         })
 

@@ -11,7 +11,8 @@ const summonerModel = new Schema({
     puuid: String,
     revisionData: Number,
     summonerLevel: Number,
-    timestamp : { type : Date, default: Date.now }
+    createdAt: { type : Date, default: Date.now },
+    leagues:Object,
 });
 
 // Compile model from schema
