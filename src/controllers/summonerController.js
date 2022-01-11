@@ -22,7 +22,13 @@ const summonerController = {
                               .then(({data}) =>{
                                    data = {...summonerData, revisionData:new Date(), leagues:data}
                                    let new_summoner = new summonerModel(data)
-                                   new_summoner.save()
+                                   new_summoner.save().then((response) => {
+                                        console.log(response)
+                                   }).catch((error) => {
+                                        console.log("É AQUI")
+                                        console.log(error)
+
+                                   })
                                    response.status(200).json(data)
                               })
                               .catch((error) => {
@@ -31,34 +37,7 @@ const summonerController = {
                               })
                          })
                          .catch((error) => {
-                              console.error(error)
-                              response.status(500).json(error);
-                         })
-                    }
-               } 
-          });
-     },
-     getSummonerByPuuid:(request, response) =>{
-          let {Puuid} = request.body
-          
-          summonerModel.findOne({puuid: Puuid}, function(err,obj) { 
-               if(err){
-                    response.status(500).json(err);
-               } else{
-                    if(obj){
-                         response.status(200).json(obj)
-                    }else{
-                         api.getSummonerByPuuid(Puuid)
-                         .then(({data}) => {
-                              let summonerData = data
-                              api.getSummonerLeague(summonerData.id)
-                              data = {...summonerData, revisionData:new Date()}
-                              let new_summoner = new summonerModel(data)
-                              new_summoner.save()
-                              response.status(200).json(data)
-                           
-                         })
-                         .catch((error) => {
+
                               console.error(error)
                               response.status(500).json(error);
                          })
