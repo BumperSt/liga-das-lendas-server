@@ -52,16 +52,11 @@ const summonerController = {
                          .then(({data}) => {
                               let summonerData = data
                               api.getSummonerLeague(summonerData.id)
-                              .then(({data}) =>{
-                                   data = {...summonerData, revisionData:new Date(), leagues:data}
-                                   let new_summoner = new summonerModel(data)
-                                   new_summoner.save()
-                                   response.status(200).json(data)
-                              })
-                              .catch((error) => {
-                                   console.error(error)
-                                   response.status(500).json(error);
-                              })
+                              data = {...summonerData, revisionData:new Date()}
+                              let new_summoner = new summonerModel(data)
+                              new_summoner.save()
+                              response.status(200).json(data)
+                           
                          })
                          .catch((error) => {
                               console.error(error)
