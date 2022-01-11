@@ -2,9 +2,9 @@ const { request, response } = require('express')
 const api = require('../../api/summoner')
 const summonerModel = require('../models/summonerModel')
 const {timeDiference} = require('../helpers/summonerHelpers')
+
+
 const summonerController = {
-
-
      getSummoner: (request, response) =>  {
           let {nickName} = request.body
           
@@ -37,8 +37,39 @@ const summonerController = {
                     }
                } 
           });
-
-         
+     },
+     getSummonerByPuuid:(request, response) =>{
+          let {Puuid} = request.body
+          
+          summonerModel.findOne({puuid: Puuid}, function(err,obj) { 
+               if(err){
+                    response.status(500).json(err);
+               } else{
+                    if(obj){
+                         response.status(200).json(obj)
+                    }else{
+                         api.getSummonerByPuuid(Puuid)
+                         .then(({data}) => {
+                              let summonerData = data
+                              api.getSummonerLeague(summonerData.id)
+                              .then(({data}) =>{
+                                   data = {...summonerData, revisionData:new Date(), leagues:data}
+                                   let new_summoner = new summonerModel(data)
+                                   new_summoner.save()
+                                   response.status(200).json(data)
+                              })
+                              .catch((error) => {
+                                   console.error(error)
+                                   response.status(500).json(error);
+                              })
+                         })
+                         .catch((error) => {
+                              console.error(error)
+                              response.status(500).json(error);
+                         })
+                    }
+               } 
+          });
      },
      updateSummoner: (request, response) => {
           let {nickName} = request.body

@@ -8,6 +8,9 @@ router.get('/champRotation', champsController.getChampsRotation)
 
 router.post('/summoner', summonerController.getSummoner)
 
+router.post('/getSummonerByPuuId', summonerController.getSummonerByPuuid)
+
+
 router.post('/updateSummoner', summonerController.updateSummoner)
 
 router.post('/getChampsMaestry', champsController.getChampMaestry)
