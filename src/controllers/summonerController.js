@@ -8,7 +8,7 @@ const Url = require('url-parse');
 const summonerController = {
      getSummoner: (request, response) =>  {
           let {nickName} = request.body
-          nickName = nickName.replaceAll(' ', '')
+
           summonerModel.findOne({name:nickName}, function(err,obj) { 
                if(err){
                     response.status(500).json(err);
