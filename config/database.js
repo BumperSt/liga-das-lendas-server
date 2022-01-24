@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const dataBase = () => {
   // Database connection
   console.log(process.env.MONGO_CONNECTION_URL)
-  mongoose.connect(process.env.MONGO_CONNECTION_URL,(err) => {
+  mongoose.connect(process.env.MONGO_CONNECTION_URL,{ useFindAndModify: false }, (err) => {
     if (err) {
         console.error(err)
     }

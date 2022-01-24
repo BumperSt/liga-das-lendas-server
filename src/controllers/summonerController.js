@@ -2,19 +2,21 @@ const { request, response } = require('express')
 const api = require('../../api/summoner')
 const summonerModel = require('../models/summonerModel')
 const {timeDiference} = require('../helpers/summonerHelpers')
+const Url = require('url-parse');
 
 
 const summonerController = {
      getSummoner: (request, response) =>  {
           let {nickName} = request.body
-          
-          summonerModel.findOne({name: nickName}, function(err,obj) { 
+          nickName = nickName.replaceAll(' ', '')
+          summonerModel.findOne({name:nickName}, function(err,obj) { 
                if(err){
                     response.status(500).json(err);
                } else{
                     if(obj){
                          response.status(200).json(obj)
                     }else{
+                         nickName = encodeURI(nickName)
                          api.getSummonerInfo(nickName)
                          .then(({data}) => {
                               let summonerData = data
@@ -25,9 +27,7 @@ const summonerController = {
                                    new_summoner.save().then((response) => {
                                         console.log(response)
                                    }).catch((error) => {
-                                        console.log("É AQUI")
-                                        console.log(error)
-
+                                        console.log("Já tem no banco")
                                    })
                                    response.status(200).json(data)
                               })

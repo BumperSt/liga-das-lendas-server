@@ -19,6 +19,8 @@ router.post('/getMatch', matchController.getMatch)
 
 router.post('/getMatchList', matchController.getMatchList)
 
+router.post('/getStaticByChampion', generateStatics.getStaticByChampion)
+
 
 
 module.exports = router

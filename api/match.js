@@ -6,5 +6,5 @@ module.exports = {
 
     getChampMatch: (puuid, championID, beginIndex) => historyApi.get(`/lol/match/v5/matches/by-puuid/${puuid}?champion=${championID}&beginIndex=${beginIndex}`),
 
-    getMatchList: (puuid, startIndex) => historyApi.get(`/lol/match/v5/matches/by-puuid/${puuid}/ids?start=${startIndex}`)
+    getMatchList: (puuid, startIndex) => historyApi.get(`/lol/match/v5/matches/by-puuid/${puuid}/ids?type=ranked&start=${startIndex}&count=10`)
 }
