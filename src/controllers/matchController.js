@@ -18,7 +18,8 @@ const matchController = {
     },
     getMatchList: (request, response)=>{
          let {puuid, startIndex, matchType} = request.body
-         api.getMatchList(puuid, startIndex, matchType)
+         console.log(matchType)
+         api.getMatchList(puuid,  matchType, startIndex)
           .then(({data}) => {
                response.status(200).json(data)
           })
