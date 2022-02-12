@@ -14,7 +14,34 @@ const summonerController = {
                     response.status(500).json(err);
                } else{
                     if(obj){
-                         response.status(200).json(obj)
+                         let diference = timeDiference(obj.revisionData)
+                         console.log(diference)
+                         if(parseInt(diference) > 10){
+                              console.log("updates")
+                              api.getSummonerInfo(nickName)
+                              .then(({data}) => {
+                                   let summonerData = data
+                                   api.getSummonerLeague(summonerData.id)
+                                   .then(({data}) =>{
+                                        data = {...summonerData, revisionData:new Date(), leagues:data}
+                                        summonerModel.findOneAndUpdate({_id: obj._id}, data, function(error, result) {
+                                             if(!error){
+                                                  response.status(200).json(data)
+                                             }
+                                        })
+                                   })
+                                   .catch((error) => {
+                                        console.error(error)
+                                        response.status(500).json(error);
+                                   })
+                                  
+                              })
+                              .catch((error) => {
+                                   response.status(500).json(error);
+                              })
+                         }else{
+                              response.status(200).json(obj)     
+                         }
                     }else{
                          nickName = encodeURI(nickName)
                          api.getSummonerInfo(nickName)
