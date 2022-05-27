@@ -18,7 +18,8 @@ const matchController = {
     },
     getMatchList: (request, response)=>{
          let {puuid, startIndex, matchType} = request.body
-         console.log(matchType)
+         console.log(request.body)
+         console.log(`/lol/match/v5/matches/by-puuid/${puuid}/ids?${matchType != 'default' && `type=${matchType}&` || ''}start=${startIndex}&count=10`)
          api.getMatchList(puuid,  matchType, startIndex)
           .then(({data}) => {
                response.status(200).json(data)
