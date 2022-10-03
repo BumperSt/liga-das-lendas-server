@@ -13,9 +13,9 @@ const summonerController = {
                if(err){
                     response.status(500).json(err);
                } else{
+                    console.log(obj)
                     if(obj){
                          let diference = timeDiference(obj.revisionData)
-                         console.log(diference)
                          if(parseInt(diference) > 10){
                               console.log("updates")
                               api.getSummonerInfo(nickName)

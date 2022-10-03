@@ -4,7 +4,6 @@ const matchModel = require('../models/matchModel')
 
 
 const matchController = {
-
      getChampMatch: (request, response) =>{
         let {puuid, championID,beginIndex} = request.body
         api.getChampMatch(puuid, championID, beginIndex)
@@ -18,9 +17,7 @@ const matchController = {
     },
     getMatchList: (request, response)=>{
          let {puuid, startIndex, matchType} = request.body
-         console.log(request.body)
-         console.log(`/lol/match/v5/matches/by-puuid/${puuid}/ids?${matchType != 'default' && `type=${matchType}&` || ''}start=${startIndex}&count=10`)
-         api.getMatchList(puuid,  matchType, startIndex)
+         api.getMatchList(puuid,  matchType, startIndex, 10)
           .then(({data}) => {
                response.status(200).json(data)
           })

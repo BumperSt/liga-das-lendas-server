@@ -12,7 +12,6 @@ const summonerHelpers = {
         difference -= minutesDifference*1000*60
     
         var secondsDifference = Math.floor(difference/1000);
-    
 
         return minutesDifference
     },
